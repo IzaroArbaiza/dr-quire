@@ -39,6 +39,8 @@ test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
 	@diff $(SRC_C) $(TEST_C)
 	@echo "[OK] Both "
+#diff -b Colleen.c test_s.c
+#sed -i 's/\r//' Colleen/Colleen.c 
 
 #--Grace--
 $(NAME_G): $(OBJ_G)
