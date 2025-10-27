@@ -23,7 +23,6 @@ OBJ_G = $(SRC_G:.c=.o)
 OBJ_S = $(SRC_S:.c=.o)
 
 TEST_C = Colleen/test_c.c
-# TEST_S = Sully/test.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -40,7 +39,7 @@ test_colleen: $(NAME_C)
 	@diff $(SRC_C) $(TEST_C)
 	@echo "[OK] Both "
 #diff -b Colleen.c test_s.c
-#sed -i 's/\r//' Colleen/Colleen.c 
+#sed -i 's/\r//' Colleen/Colleen.c	#Character CR (carriage return), used by Windows
 
 #--Grace--
 $(NAME_G): $(OBJ_G)
@@ -59,9 +58,8 @@ $(NAME_S): $(OBJ_S)
 
 test_sully: $(NAME_S)
 	@./$(NAME_S)
+	@diff Sully/Sully.c Sully/Sully_4.c
 #ls -al | grep Sully | wc -l
-#diff ../Sully.c Sully_0.c
-#diff Sully_3.c Sully_2.c
 
 clean:
 	@rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S)
