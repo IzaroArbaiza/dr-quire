@@ -12,15 +12,15 @@
 
 NAME_C = Colleen/Colleen
 NAME_G = Grace/Grace
-#NAME_S = Sully/Sully
+NAME_S = Sully/Sully
 
 SRC_C = Colleen/Colleen.c
 SRC_G = Grace/Grace.c
-#SRC_S = Sully/Sully.c
+SRC_S = Sully/Sully.c
 
 OBJ_C = $(SRC_C:.c=.o)
 OBJ_G = $(SRC_G:.c=.o)
-#OBJ_S = $(SRC_S:.c=.o)
+OBJ_S = $(SRC_S:.c=.o)
 
 TEST_C = Colleen/test_c.c
 # TEST_S = Sully/test.c
@@ -28,7 +28,7 @@ TEST_C = Colleen/test_c.c
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME_C) $(NAME_G)
+all: $(NAME_C) $(NAME_G) $(NAME_S)
 
 #--Colleen--
 $(NAME_C): $(OBJ_C)
@@ -50,18 +50,29 @@ $(NAME_G): $(OBJ_G)
 test_grace: $(NAME_G)
 	@./$(NAME_G)
 	@diff $(SRC_G) Grace/Grace_kid.c
-	@echo "[OK] Grace replicated successfully!"
+	@echo "[OK] $(NAME_G) replicated successfully!"
+
+#--Sully--
+$(NAME_S): $(OBJ_S)
+	@$(CC) $(CFLAGS) $(OBJ_S) -o $(NAME_S)
+	@echo "[OK] $(NAME_S) compiled successfully."
+
+test_sully: $(NAME_S)
+	@./$(NAME_S)
+#ls -al | grep Sully | wc -l
+#diff ../Sully.c Sully_0.c
+#diff Sully_3.c Sully_2.c
 
 clean:
-	rm -f $(OBJ_C) $(OBJ_G)
+	@rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S)
+	@echo "Object files removed."
 
 fclean: clean
-	rm -f $(NAME_C) $(NAME_G)
-	rm -f $(TEST_C) Grace/Grace_kid.c
+	@rm -f $(NAME_C) $(NAME_G) $(NAME_S)
+	@rm -f $(TEST_C) Grace/Grace_kid.c
+	@rm -f Sully/Sully_*
+	@echo "All binaries and generated files removed."
 
 re: fclean all
 
-Colleen: $(NAME_C)
-Grace: $(NAME_G)
-
-.PHONY: all clean fclean re Colleen Grace test_colleen test_grace
+.PHONY: all clean fclean re test_colleen test_grace test_sully
