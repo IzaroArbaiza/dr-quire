@@ -6,7 +6,7 @@
 #    By: iarbaiza <iarbaiza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 11:17:54 by iarbaiza          #+#    #+#              #
-#    Updated: 2025/10/27 13:25:09 by iarbaiza         ###   ########.fr        #
+#    Updated: 2025/10/28 08:42:35 by iarbaiza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,8 @@ clean:
 	@echo "Object files removed."
 
 fclean: clean
-	@rm -f $(NAME_C)
+	@rm -f $(NAME_C) 
+	@rm -f $(TEST_C) 
 	@echo "All binaries and generated files removed."
 
 re: fclean all
