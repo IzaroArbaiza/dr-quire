@@ -6,7 +6,7 @@
 #    By: iarbaiza <iarbaiza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 11:17:54 by iarbaiza          #+#    #+#              #
-#    Updated: 2025/10/28 08:42:35 by iarbaiza         ###   ########.fr        #
+#    Updated: 2026/02/02 18:01:20 by iarbaiza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,27 +14,27 @@ NAME_C = Colleen/Colleen
 #NAME_G = Grace/Grace
 #NAME_S = Sully/Sully
 
-SRC_C = Colleen/Colleen.s
+SRC_C = Colleen/Colleen.asm
 #SRC_G = Grace/Grace.s
 #SRC_S = Sully/Sully.s
 
-OBJ_C = $(SRC_C:.s=.o)
+OBJ_C = $(SRC_C:.asm=.o)
 #OBJ_G = $(SRC_G:.s=.o)
 #OBJ_S = $(SRC_S:.s=.o)
 
-TEST_C = Colleen/test_c.s
+TEST_C = Colleen/test_c.asm
 
-NASM    = nasm
+NASM = nasm
 NASMFLAGS = -f elf64
 CC = cc
+CFLAGS = -nostartfiles -no-pie
 
 all: $(NAME_C)
 #$(NAME_G) $(NAME_S)
 
 #--Colleen--
 $(NAME_C): $(OBJ_C)
-	@$(CC) -nostartfiles $(OBJ_C) -o $(NAME_C)
-	@echo "[OK] Colleen compiled successfully."
+	@$(CC) $(CFLAGS) $(OBJ_C) -o $(NAME_C) && echo "[SUCCESS] Quine match!" || echo "[FAIL] Files differ"
 
 test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
@@ -42,7 +42,7 @@ test_colleen: $(NAME_C)
 	@echo "[OK] Both "
 #diff -b Colleen.s test_s.s
 
-%.o: %.s
+%.o: %.asm
 	@$(NASM) $(NASMFLAGS) $< -o $@
 
 clean: 
