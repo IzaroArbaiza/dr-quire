@@ -6,7 +6,7 @@
 #    By: iarbaiza <iarbaiza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 11:17:54 by iarbaiza          #+#    #+#              #
-#    Updated: 2026/02/02 18:01:20 by iarbaiza         ###   ########.fr        #
+#    Updated: 2026/02/04 17:47:41 by iarbaiza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,23 +26,23 @@ TEST_C = Colleen/test_c.asm
 
 NASM = nasm
 NASMFLAGS = -f elf64
-CC = cc
-CFLAGS = -nostartfiles -no-pie
+CC = gcc
+CFLAGS = -no-pie
 
 all: $(NAME_C)
 #$(NAME_G) $(NAME_S)
 
 #--Colleen--
 $(NAME_C): $(OBJ_C)
-	@$(CC) $(CFLAGS) $(OBJ_C) -o $(NAME_C) && echo "[SUCCESS] Quine match!" || echo "[FAIL] Files differ"
+	@$(CC) $(CFLAGS) $(OBJ_C) -o $(NAME_C)
 
 test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
-	@diff $(SRC_C) $(TEST_C)
-	@echo "[OK] Both "
+	@diff $(SRC_C) $(TEST_C) && echo "[OK] Both"
 #diff -b Colleen.s test_s.s
 
 %.o: %.asm
+#error aquí abajo (no compila bien)
 	@$(NASM) $(NASMFLAGS) $< -o $@
 
 clean: 
