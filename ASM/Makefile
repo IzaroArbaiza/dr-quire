@@ -6,7 +6,7 @@
 #    By: iarbaiza <iarbaiza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 11:17:54 by iarbaiza          #+#    #+#              #
-#    Updated: 2026/04/28 16:47:57 by iarbaiza         ###   ########.fr        #
+#    Updated: 2026/04/29 20:10:36 by iarbaiza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ OBJ_S = $(SRC_S:.s=.o)
 TEST_C = Colleen/test_c.s
 
 NASM = nasm
-NASMFLAGS = -f elf64
+NASMFLAGS = -f elf64 -g -F dwarf
 CC = gcc
 CFLAGS = -no-pie
 
