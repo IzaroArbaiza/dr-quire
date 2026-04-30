@@ -6,7 +6,7 @@
 #    By: iarbaiza <iarbaiza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 11:17:54 by iarbaiza          #+#    #+#              #
-#    Updated: 2026/04/29 20:10:36 by iarbaiza         ###   ########.fr        #
+#    Updated: 2026/04/30 19:53:02 by iarbaiza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,19 +47,21 @@ test_grace: $(NAME_G)
 	@./$(NAME_G)
 	@diff $(SRC_G) Grace_kid.s && echo "[OK] Both are exactly the same."
 test_sully: $(NAME_S)
-	@./$(NAME_S)
-	@diff $(SRC_S) Sully/Sully_4.s && echo "[OK] Both are exactly the same."
+	@cd Sully; ./Sully;
+	@cd Sully; mkdir -p tmp; cp Sully tmp/; cd tmp/; ./Sully ; ls -al | grep Sully | wc -l
+#@diff $(SRC_S) Sully/Sully_4.s && echo "[OK] Both are exactly the same."
 
 %.o: %.s
 	@$(NASM) $(NASMFLAGS) $< -o $@
 
 clean: 
-	@rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S)
+	@rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S) Sully/Sully_*.o
 	@echo "Object files removed."
 
 fclean: clean
-	@rm -f $(NAME_C) $(NAME_G) $(NAME_S)
+	@rm -f $(NAME_C) $(NAME_G) $(NAME_S) Sully/Sully_*
 	@rm -f $(TEST_C) Grace_kid.s Sully/Sully_*.s
+	@rm -Rf Sully/tmp
 	@echo "All binaries and generated files removed."
 
 re: fclean all

@@ -57,9 +57,10 @@ $(NAME_S): $(OBJ_S)
 	@echo "[OK] $(NAME_S) compiled successfully."
 
 test_sully: $(NAME_S)
-	@./$(NAME_S)
-	@diff Sully/Sully.c Sully/Sully_4.c
-#ls -al | grep Sully | wc -l
+	@cd Sully; ./Sully;
+	@cd Sully; mkdir -p tmp; cp Sully tmp/; cd tmp/; ./Sully ; ls -al | grep Sully | wc -l
+	@cd Sully/tmp; diff ../Sully.c Sully_5.c ; diff ../Sully.c Sully_4.c ; diff Sully_5.c Sully_0.c
+#@diff Sully/Sully.c Sully/Sully_4.c
 
 clean:
 	@rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S)
@@ -69,6 +70,7 @@ fclean: clean
 	@rm -f $(NAME_C) $(NAME_G) $(NAME_S)
 	@rm -f $(TEST_C) Grace/Grace_kid.c
 	@rm -f Sully/Sully_*
+	@rm -Rf Sully/tmp
 	@echo "All binaries and generated files removed."
 
 re: fclean all
