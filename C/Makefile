@@ -48,7 +48,7 @@ $(NAME_G): $(OBJ_G)
 
 test_grace: $(NAME_G)
 	@./$(NAME_G)
-	@diff $(SRC_G) Grace/Grace_kid.c
+	@diff $(SRC_G) Grace_kid.c
 	@echo "[OK] $(NAME_G) replicated successfully!"
 
 #--Sully--
@@ -67,7 +67,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME_C) $(NAME_G) $(NAME_S)
-	@rm -f $(TEST_C) Grace/Grace_kid.c
+	@rm -f $(TEST_C) Grace/Grace_kid.c Grace_kid.c
 	@rm -f Sully/Sully_*
 	@rm -Rf Sully/tmp
 	@echo "All binaries and generated files removed."

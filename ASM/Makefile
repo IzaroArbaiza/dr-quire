@@ -60,7 +60,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME_C) $(NAME_G) $(NAME_S) Sully/Sully_*
-	@rm -f $(TEST_C) Grace_kid.s Sully/Sully_*.s
+	@rm -f $(TEST_C) Grace/Grace_kid.s Grace_kid.s Sully/Sully_*.s
 	@rm -Rf Sully/tmp
 	@echo "All binaries and generated files removed."
 
