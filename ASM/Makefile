@@ -49,7 +49,7 @@ test_grace: $(NAME_G)
 test_sully: $(NAME_S)
 	@cd Sully; ./Sully;
 	@cd Sully; mkdir -p tmp; cp Sully tmp/; cd tmp/; ./Sully ; ls -al | grep Sully | wc -l
-#@diff $(SRC_S) Sully/Sully_4.s && echo "[OK] Both are exactly the same."
+	@cd Sully/tmp; diff ../Sully.s Sully_5.s ; diff ../Sully.s Sully_4.s ; diff Sully_5.s Sully_0.s
 
 %.o: %.s
 	@$(NASM) $(NASMFLAGS) $< -o $@

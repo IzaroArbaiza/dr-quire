@@ -60,7 +60,6 @@ test_sully: $(NAME_S)
 	@cd Sully; ./Sully;
 	@cd Sully; mkdir -p tmp; cp Sully tmp/; cd tmp/; ./Sully ; ls -al | grep Sully | wc -l
 	@cd Sully/tmp; diff ../Sully.c Sully_5.c ; diff ../Sully.c Sully_4.c ; diff Sully_5.c Sully_0.c
-#@diff Sully/Sully.c Sully/Sully_4.c
 
 clean:
 	@rm -f $(OBJ_C) $(OBJ_G) $(OBJ_S)
