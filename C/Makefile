@@ -38,7 +38,6 @@ test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
 	@diff $(SRC_C) $(TEST_C)
 	@echo "[OK] Both "
-#diff -b Colleen.c test_s.c
 #sed -i 's/\r//' Colleen/Colleen.c	#Character CR (carriage return), used by Windows
 
 #--Grace--
@@ -67,8 +66,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME_C) $(NAME_G) $(NAME_S)
-	@rm -f $(TEST_C) Grace/Grace_kid.c Grace_kid.c
-	@rm -f Sully/Sully_*
+	@rm -f $(TEST_C) Grace/Grace_kid.c Grace_kid.c Sully/Sully_*
 	@rm -Rf Sully/tmp
 	@echo "All binaries and generated files removed."
 

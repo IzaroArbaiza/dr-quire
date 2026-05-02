@@ -34,18 +34,23 @@ all: $(NAME_C) $(NAME_G) $(NAME_S)
 #--Colleen--
 $(NAME_C): $(OBJ_C)
 	@$(CC) $(CFLAGS) $(OBJ_C) -o $(NAME_C)
-$(NAME_G): $(OBJ_G)
-	@$(CC) $(CFLAGS) $(OBJ_G) -o $(NAME_G)
-$(NAME_S): $(OBJ_S)
-	@$(CC) $(CFLAGS) $(OBJ_S) -o $(NAME_S)
 
 test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
 	@diff $(SRC_C) $(TEST_C) && echo "[OK] Both are exactly the same."
-#diff -b Colleen.s test_s.s
+
+#--Grace--
+$(NAME_G): $(OBJ_G)
+	@$(CC) $(CFLAGS) $(OBJ_G) -o $(NAME_G)
+
 test_grace: $(NAME_G)
 	@./$(NAME_G)
 	@diff $(SRC_G) Grace_kid.s && echo "[OK] Both are exactly the same."
+
+#--Sully--
+$(NAME_S): $(OBJ_S)
+	@$(CC) $(CFLAGS) $(OBJ_S) -o $(NAME_S)
+
 test_sully: $(NAME_S)
 	@cd Sully; ./Sully;
 	@cd Sully; mkdir -p tmp; cp Sully tmp/; cd tmp/; ./Sully ; ls -al | grep Sully | wc -l
