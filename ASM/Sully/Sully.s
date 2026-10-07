@@ -11,24 +11,24 @@ main:
 	mov rbp, rsp
 
 	mov edi, 5
-	mov [x_store], edi
+	lea [rel x_store], edi
 
-	cmp dword [x_store], 0
+	cmp dword [rel x_store], 0
 	jl .exit
 
-	mov eax, [x_store]
+	lea eax, [rel x_store]
 	sub eax, 1
-	mov [x_next], eax
+	lea [rel x_next], eax
 
-	mov rdi, buffer
-	mov rsi, form
-	mov edx, [x_store]
+	lea rdi, [rel buffer]
+	lea rsi, [rel form]
+	lea edx, [rel x_store]
 	xor rax, rax
-	call sprintf
+	call sprintf wrt ..plt
 
-	mov rdi, buffer
-	mov rsi, mode
-	call fopen
+	lea rdi, [rel buffer]
+	lea rsi, [rel mode]
+	call fopen wrt ..plt
 
 	test rax, rax
 	jz .error
@@ -36,41 +36,42 @@ main:
 	mov rbx, rax
 
 	mov rdi, rbx
-	mov rsi, code
+	lea rsi, [rel code]
 	mov rdx, 10
 	mov rcx, 9
 	mov r8, 34
-	mov r9, code
+	lea r9, [rel code]
 
 	sub rsp, 8
-	mov eax, [x_next]
-	mov [rsp], rax
+	lea eax, [rel x_next]
+	lea [rel rsp], rax
 
 	xor rax, rax
-	call fprintf
+	call fprintf wrt ..plt
 	add rsp, 8
 
 	mov rdi, rbx
-	call fclose
+	call fclose wrt ..plt
 
-	mov rdi, compile_cmd
-	mov rsi, compile
-	mov rdx, buffer
-	mov ecx, [x_store]
+	lea rdi, [rel compile_cmd]
+	lea rsi, [rel compile]
+	lea rdx, [rel buffer]
+	lea ecx, [rel x_store]
 	xor rax, rax
-	call sprintf
+	call sprintf wrt ..plt
 
-	mov rdi, compile_cmd
-	call system
+	lea rdi, [rel compile_cmd]
+	call system wrt ..plt
 
-	mov rdi, exec_cmd
-	mov rsi, exec
-	mov edx, [x_store]
+	lea rdi, [rel exec_cmd]
+	lea rsi, [rel exec]
+	lea edx, [rel x_store]
 	xor rax, rax
-	call sprintf
+	call sprintf wrt ..plt
+	pop rax
 
-	mov rdi, exec_cmd
-	call system
+	lea rdi, [rel exec_cmd]
+	call system wrt ..plt
 
 .exit:
 	xor eax, eax

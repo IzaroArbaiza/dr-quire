@@ -22,7 +22,7 @@ OBJ_C = $(SRC_C:.c=.o)
 OBJ_G = $(SRC_G:.c=.o)
 OBJ_S = $(SRC_S:.c=.o)
 
-TEST_C = Colleen/test_c.c
+TEST_C = Colleen/tmp_Colleen.c
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
