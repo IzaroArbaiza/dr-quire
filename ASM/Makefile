@@ -6,7 +6,7 @@
 #    By: iarbaiza <iarbaiza@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/27 11:17:54 by iarbaiza          #+#    #+#              #
-#    Updated: 2026/10/08 11:35:16 by iarbaiza         ###   ########.fr        #
+#    Updated: 2026/10/14 15:29:09 by iarbaiza         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,11 +29,13 @@ NASMFLAGS = -f elf64 -g -F dwarf
 CC = gcc
 CFLAGS = -no-pie
 
+
 all: $(NAME_C) $(NAME_G) $(NAME_S)
 
 #--Colleen--
 $(NAME_C): $(OBJ_C)
 	@$(CC) $(CFLAGS) $(OBJ_C) -o $(NAME_C)
+	@echo "[OK] $(NAME_C) compiled successfully."
 
 test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
@@ -42,6 +44,7 @@ test_colleen: $(NAME_C)
 #--Grace--
 $(NAME_G): $(OBJ_G)
 	@$(CC) $(CFLAGS) $(OBJ_G) -o $(NAME_G)
+	@echo "[OK] $(NAME_G) compiled successfully."
 
 test_grace: $(NAME_G)
 	@./$(NAME_G)
@@ -50,6 +53,7 @@ test_grace: $(NAME_G)
 #--Sully--
 $(NAME_S): $(OBJ_S)
 	@$(CC) $(CFLAGS) $(OBJ_S) -o $(NAME_S)
+	@echo "[OK] $(NAME_S) compiled successfully."
 
 test_sully: $(NAME_S)
 	@cd Sully; ./Sully;

@@ -36,8 +36,7 @@ $(NAME_C): $(OBJ_C)
 
 test_colleen: $(NAME_C)
 	@./$(NAME_C) > $(TEST_C)
-	@diff $(SRC_C) $(TEST_C)
-	@echo "[OK] Both "
+	@diff $(SRC_C) $(TEST_C) && echo "[OK] Both are exactly the same."
 #sed -i 's/\r//' Colleen/Colleen.c	#Character CR (carriage return), used by Windows
 
 #--Grace--
@@ -47,8 +46,7 @@ $(NAME_G): $(OBJ_G)
 
 test_grace: $(NAME_G)
 	@./$(NAME_G)
-	@diff $(SRC_G) Grace_kid.c
-	@echo "[OK] $(NAME_G) replicated successfully!"
+	@diff $(SRC_G) Grace_kid.s && echo "[OK] Both are exactly the same."
 
 #--Sully--
 $(NAME_S): $(OBJ_S)
